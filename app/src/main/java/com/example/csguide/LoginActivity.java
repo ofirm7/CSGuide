@@ -7,6 +7,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -92,6 +94,60 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         }
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        super.onCreateOptionsMenu(menu);
+        getMenuInflater().inflate(R.menu.main_menu, menu);
+
+        for (int i = 0; i < menu.size(); i++) {
+            MenuItem item = menu.getItem(i);
+            item.setShowAsActionFlags(MenuItem.SHOW_AS_ACTION_ALWAYS);
+        }
+        MenuItem item;
+        item = menu.getItem(0);
+        item.setEnabled(false);
+        item.setVisible(false);
+
+        item = menu.getItem(1);
+        item.setEnabled(false);
+        item.setVisible(false);
+
+        /* shut down register
+        item = menu.getItem(2);
+        item.setEnabled(false);
+        item.setVisible(false);
+        */
+        item = menu.getItem(3);
+        item.setEnabled(false);
+        item.setVisible(false);
+
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        if (id == R.id.action_login) {
+            Intent intent = new Intent(this, LoginActivity.class);
+            startActivityForResult(intent, 0);
+            //Toast.makeText(this,"you selected login",Toast.LENGTH_LONG).show();
+            return true;
+        } else if (id == R.id.action_register) {
+            Intent intent = new Intent(this, SignUpActivity.class);
+            startActivityForResult(intent, 0);
+            return true;
+        } else if (id == R.id.action_exit) {
+            sharedPref.SetUsername("YouRGuest");
+            //Toast.makeText(this,"you sure you want to logout?",Toast.LENGTH_LONG).show();
+            restartapp();
+            return true;
+        } else if (id == R.id.action_GoHome) {
+            finish();
+            return true;
+        }
+        return true;
+    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {

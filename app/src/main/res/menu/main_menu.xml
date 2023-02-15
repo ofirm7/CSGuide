@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/username"
+        android:title="YouRGuest"
+        android:orderInCategory="100"
+        />
+    <item
+        android:id="@+id/action_login"
+        android:title="Login"
+        android:orderInCategory="200"
+
+        />
+    <item
+        android:id="@+id/action_register"
+        android:title="Register"
+        android:orderInCategory="300" />
+    <item
+        android:id="@+id/action_exit"
+        android:title="Logout"
+        android:orderInCategory="400" />
+    <item
+        android:id="@+id/action_GoHome"
+        android:title="Home"
+        android:orderInCategory="500"
+        />
+
+</menu>
