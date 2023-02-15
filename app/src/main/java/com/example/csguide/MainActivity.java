@@ -146,7 +146,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             //Toast.makeText(this,"you selected login",Toast.LENGTH_LONG).show();
             return true;
         } else if (id == R.id.action_register) {
-            Intent intent = new Intent(this, MainActivity.class);
+            Intent intent = new Intent(this, SignUpActivity.class);
             startActivityForResult(intent, 0);
             return true;
         } else if (id == R.id.action_exit) {

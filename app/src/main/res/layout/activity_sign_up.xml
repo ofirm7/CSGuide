@@ -1,9 +1,93 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".SignUpActivity">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/topLoginPage"
+        android:textColor="@color/black"
+        android:text="Sign Up"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:textSize="50dp"
+        />
+
+    <EditText
+        android:id="@+id/emailSignUp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="Email"
+        android:textSize="35dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="7dp"
+        />
+
+    <EditText
+        android:id="@+id/usernameSignUp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="Username"
+        android:textSize="35dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="7dp"
+        />
+
+    <EditText
+        android:id="@+id/phoneNumberSignUp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="Phone number"
+        android:textSize="35dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="7dp"
+        />
+
+    <EditText
+        android:id="@+id/passwordSignUp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="Password"
+        android:textSize="30dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="7dp"
+        />
+
+    <EditText
+        android:id="@+id/passwordConfirmationSignUp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="confirm password"
+        android:textSize="30dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="7dp"
+        />
+
+    <Button
+        android:id="@+id/submitSignUp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Submit"
+        android:textColor="#fff"
+        android:textSize="30dp"
+        android:background="#fff"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        />
+    <Button
+        android:id="@+id/toLoginFromSignUp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Already have an account?"
+        android:textColor="#DDFFFFFF"
+        android:textSize="15dp"
+        android:layout_marginTop="7dp"
+        android:layout_gravity="center"
+        />
+
+</LinearLayout>
