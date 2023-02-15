@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "448713661213",
+    "firebase_url": "https://csguide-cc263-default-rtdb.firebaseio.com",
+    "project_id": "csguide-cc263",
+    "storage_bucket": "csguide-cc263.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:448713661213:android:f3e2e208776da5360b1ff4",
+        "android_client_info": {
+          "package_name": "com.example.csguide"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "448713661213-g7mtnpm2tm5k07i68oag9629b0rsmh2i.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCZUwEYuSOYLn8keyqIcpnMfxzBHN70AfE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "448713661213-g7mtnpm2tm5k07i68oag9629b0rsmh2i.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
