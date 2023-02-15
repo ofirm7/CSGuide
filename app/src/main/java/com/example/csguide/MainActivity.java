@@ -15,6 +15,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -29,13 +30,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     SharedPref sharedPref;
     AlertDialog.Builder builder;
 
+    ImageButton addCSItemIBtn;
 
     ListView listView;
     List list = new ArrayList();
     EditText searchedTextFlag;
     ArrayAdapter adapter;
-
-    Button btn1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +45,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
 
         builder = new AlertDialog.Builder(this);
+
+        addCSItemIBtn = findViewById(R.id.addCSItemIB);
+        addCSItemIBtn.setOnClickListener(this);
 
         listView = findViewById(R.id.listViewTry);
         searchedTextFlag = findViewById(R.id.searchedText);
@@ -90,9 +93,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     @Override
-    public void onClick(View v) {
-        Intent i = new Intent(getApplicationContext(), LoginActivity.class);
-        startActivity(i);
+    public void onClick(View view) {
+        if (view == addCSItemIBtn)
+        {
+            
+        }
     }
 
     @Override

@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CSGuide">
         <activity
+            android:name=".CSItemActivity"
+            android:exported="false" />
+        <activity
             android:name=".SignUpActivity"
             android:exported="false" />
         <activity
