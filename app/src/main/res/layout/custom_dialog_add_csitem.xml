@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:layout_gravity="center">
+
+    <EditText
+        android:layout_marginTop="10dp"
+        android:id="@+id/nameOfCSItem"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint=" Name of Item "
+        android:textSize="20dp"
+        />
+
+    <Button
+        android:layout_gravity="center"
+        android:id="@+id/addCSItemBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Submit"
+        android:textSize="20dp"
+        android:layout_marginTop="10dp"
+        />
+
+</LinearLayout>

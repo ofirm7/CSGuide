@@ -4,6 +4,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -31,6 +32,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     AlertDialog.Builder builder;
 
     ImageButton addCSItemIBtn;
+    Dialog addDialog;
+    EditText nameOfCSItem;
+    Button addCSItem;
 
     ListView listView;
     List list = new ArrayList();
@@ -75,20 +79,43 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     }
 
+    public void OpenAddMuscleDialog() {
+        addDialog = new Dialog(this);
+        addDialog.setContentView(R.layout.custom_dialog_add_csitem);
+        addDialog.setTitle("Add Item");
+
+        addDialog.setCancelable(true);
+
+        nameOfCSItem = addDialog.findViewById(R.id.nameOfCSItem);
+        addCSItem = addDialog.findViewById(R.id.addCSItemBtn);
+
+
+        addCSItem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(v == addCSItem)
+                {
+                    DataModel.csItems.add(new CSItem(nameOfCSItem.getText().toString(), null));
+                    DataModel.csItemsSave();
+                    addDialog.dismiss();
+                    restartapp();
+                }
+            }
+        });
+
+        addDialog.show();
+    }
+
     private void createList()
     {
-        /*
-        list.add("For");
-        list.add("Int");
-        */
-
-        /*DataModel.users.add(new User("try", "try2", "try3", "try4"));
-        DataModel.usersSave();*/
-
-        for (User user: DataModel.users) {
+        /*for (User user: DataModel.users) {
             list.add(user.getUsername());
         }
+*/
 
+        for (CSItem csitem: DataModel.csItems) {
+            list.add(csitem.getName());
+        }
         return;
     }
 
@@ -96,7 +123,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View view) {
         if (view == addCSItemIBtn)
         {
-            
+            OpenAddMuscleDialog();
         }
     }
 
