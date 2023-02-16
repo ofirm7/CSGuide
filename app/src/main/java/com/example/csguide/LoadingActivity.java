@@ -19,7 +19,7 @@ import java.util.ArrayList;
 public class LoadingActivity extends AppCompatActivity {
 
     FirebaseDatabase database;
-    DatabaseReference dbUsersRef;
+    DatabaseReference dbUsersRef, dbCSItemsRef;
     BroadcastReceiver BRNetwork;
 
     @Override
@@ -28,6 +28,26 @@ public class LoadingActivity extends AppCompatActivity {
 
         database = FirebaseDatabase.getInstance();
         dbUsersRef = database.getReference("users");
+        dbCSItemsRef = database.getReference("csItems");
+
+        dbCSItemsRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                // This method is called once with the initial value and again
+                // whenever data at this location is updated.
+                GenericTypeIndicator<ArrayList<CSItem>> t = new GenericTypeIndicator<ArrayList<CSItem>>() {
+                };
+                ArrayList<CSItem> fbCSItems = dataSnapshot.getValue(t);
+                DataModel.csItems.clear();
+                DataModel.csItems.addAll(fbCSItems);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+                // Failed to read value
+                Log.w("CSGuide", "Failed to read value.", error.toException());
+            }
+        });
 
         dbUsersRef.addValueEventListener(new ValueEventListener() {
             @Override

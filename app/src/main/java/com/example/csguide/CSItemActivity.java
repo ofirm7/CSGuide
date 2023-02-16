@@ -10,19 +10,13 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.MediaController;
 import android.widget.TextView;
-import android.widget.VideoView;
-
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
 
 public class CSItemActivity extends AppCompatActivity {
 
     SharedPref sharedPref;
-    TextView nameOfExerciseTv, exerciseCreatorTv, exerciseDescriptionTv, exerciseDetailsTv;
+    TextView nameOfCSItemTv, exerciseCreatorTv, exerciseDescriptionTv, exerciseDetailsTv;
     AlertDialog.Builder builder;
     Button changeOrAddVideo, editDetails, removeDetails, submitDetails, addVideo, deleteVideo;
     EditText exerciseDetailsEt, urlEv;
@@ -36,11 +30,11 @@ public class CSItemActivity extends AppCompatActivity {
         sharedPref = new SharedPref(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_csitem);
-/*
-        nameOfExerciseTv = findViewById(R.id.nameOfExerciseTv);
-        nameOfExerciseTv.setText(DataModel.muscles.get(getIntent().getIntExtra("WESEC", 0))
-                .getExercisesList().get(getIntent().getIntExtra("ELTOE", 0)).getName());
 
+        nameOfCSItemTv = findViewById(R.id.nameOfExerciseTv);
+        nameOfCSItemTv.setText(DataModel.csItems.get(getIntent().getIntExtra("CSII", 0)).getName());
+
+        /*
         exerciseCreatorTv = findViewById(R.id.exerciseCreatorTv);
         exerciseCreatorTv.setText(" BY " + DataModel.muscles.get(getIntent().getIntExtra("WESEC", 0))
                 .getExercisesList().get(getIntent().getIntExtra("ELTOE", 0)).getCreator());
@@ -135,6 +129,6 @@ public class CSItemActivity extends AppCompatActivity {
         deleteVideo.setOnClickListener(this);
 
         builder = new AlertDialog.Builder(this);
-       */
+         */
     }
 }

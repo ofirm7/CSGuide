@@ -2,8 +2,8 @@ package com.example.csguide;
 
 public class CSItem {
 
-    protected String name;
-    protected String description;
+    private String name;
+    private String description;
 
     public CSItem(String name, String description) {
         this.name = name;

@@ -13,6 +13,7 @@ import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -26,7 +27,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemClickListener {
 
     SharedPref sharedPref;
     AlertDialog.Builder builder;
@@ -77,6 +78,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         });
 
+        listView.setOnItemClickListener(this);
+
     }
 
     public void OpenAddMuscleDialog() {
@@ -117,6 +120,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             list.add(csitem.getName());
         }
         return;
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+        String choosenCSItemName = listView.getItemAtPosition(position).toString();
+        position = list.indexOf(choosenCSItemName);
+
+        Intent intent1 = new Intent(this, CSItemActivity.class);
+        intent1.putExtra("CSII", position);
+        startActivity(intent1);
+        finish();
     }
 
     @Override
@@ -221,5 +236,4 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         startActivity(i);
         finish();
     }
-
 }
