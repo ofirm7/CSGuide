@@ -95,7 +95,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                 DataModel.users.add(new User(username.getText().toString(), pass.getText().toString(), email.getText().toString(),
                         phoneNumber.getText().toString()));
                 DataModel.usersSave();
-                sharedPref.SetUsername(username.getText().toString());
+                sharedPref.SetUsername(username.getText().toString(), false);
                 finish();
             }
         } else if (view == toLoginFromSignUp) {
@@ -176,7 +176,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
             startActivityForResult(intent, 0);
             return true;
         } else if (id == R.id.action_exit) {
-            sharedPref.SetUsername("YouRGuest");
+            sharedPref.SetUsername("YouRGuest", false);
             //Toast.makeText(this,"you sure you want to logout?",Toast.LENGTH_LONG).show();
             restartapp();
             return true;

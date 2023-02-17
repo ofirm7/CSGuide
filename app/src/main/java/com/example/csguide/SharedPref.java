@@ -11,9 +11,10 @@ public class SharedPref {
         mySharedPrefrences = context.getSharedPreferences("filename", context.MODE_PRIVATE);
     }
 
-    public void SetUsername(String username) {
+    public void SetUsername(String username, boolean isAdmin) {
         SharedPreferences.Editor editor = mySharedPrefrences.edit();
         editor.putString("username", username);
+        editor.putBoolean("isAdmin", isAdmin);
         editor.commit();
     }
 
@@ -22,8 +23,12 @@ public class SharedPref {
         return user;
     }
 
+    public boolean IsAdmin()
+    {
+        return mySharedPrefrences.getBoolean("isAdmin", false);
+    }
+
     public String GetPhoneNumber() {
         return mySharedPrefrences.getString("phoneNumber", "YouRGuest");
     }
-
 }

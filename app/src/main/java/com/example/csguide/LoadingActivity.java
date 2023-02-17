@@ -20,7 +20,6 @@ public class LoadingActivity extends AppCompatActivity {
 
     FirebaseDatabase database;
     DatabaseReference dbUsersRef, dbCSItemsRef;
-    BroadcastReceiver BRNetwork;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

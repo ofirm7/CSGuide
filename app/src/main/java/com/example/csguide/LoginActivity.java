@@ -64,7 +64,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                             && DataModel.users.get(temp).getUsername().equals(usernameOrEmail.getText().toString())
                             || DataModel.users.get(temp).getPassword().equals(pass.getText().toString())
                             && DataModel.users.get(temp).getEmail().equals(usernameOrEmail.getText().toString())) {
-                        sharedPref.SetUsername(DataModel.users.get(temp).getUsername());
+                        sharedPref.SetUsername(DataModel.users.get(temp).getUsername(), DataModel.users.get(temp).getIsAdmin());
 
                         finish();
                     }
@@ -138,7 +138,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             startActivityForResult(intent, 0);
             return true;
         } else if (id == R.id.action_exit) {
-            sharedPref.SetUsername("YouRGuest");
+            sharedPref.SetUsername("YouRGuest", false);
             //Toast.makeText(this,"you sure you want to logout?",Toast.LENGTH_LONG).show();
             restartapp();
             return true;

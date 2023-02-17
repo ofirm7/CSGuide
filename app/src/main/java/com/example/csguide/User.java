@@ -6,12 +6,14 @@ public class User {
     protected String password;
     protected String email;
     protected String phoneNumber;
+    protected boolean isAdmin;
 
     public User(String username, String password, String email, String phoneNumber) {
         this.username = username;
         this.password = password;
         this.email = email;
         this.phoneNumber = phoneNumber;
+        this.isAdmin = false;
     }
 
     public User() {
@@ -47,6 +49,14 @@ public class User {
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
+    }
+
+    public boolean getIsAdmin() {
+        return isAdmin;
+    }
+
+    public void setIsAdmin(boolean admin) {
+        isAdmin = admin;
     }
 
     @Override

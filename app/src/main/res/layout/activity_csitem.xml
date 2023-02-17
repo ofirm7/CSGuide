@@ -13,22 +13,12 @@
         >
 
         <TextView
-            android:id="@+id/nameOfExerciseTv"
+            android:id="@+id/nameOfCSItemTv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="10dp"
             android:textSize="30dp" />
-
-        <TextView
-            android:id="@+id/exerciseDescriptionTv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="5dp"
-            android:background="#FFA200"
-            android:textColor="#001BFF"
-            android:textSize="15dp" />
 
         <TextView
             android:id="@+id/detailsTv"
@@ -41,7 +31,7 @@
             android:textSize="20dp" />
 
         <TextView
-            android:id="@+id/exerciseDetailsTv"
+            android:id="@+id/csItemDetailsTv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
@@ -51,7 +41,7 @@
             android:textSize="20dp" />
 
         <EditText
-            android:id="@+id/exerciseDetailsEt"
+            android:id="@+id/csItemDetailsEt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"

@@ -49,6 +49,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //DataModel.usersUpdate();
+
         builder = new AlertDialog.Builder(this);
 
         addCSItemIBtn = findViewById(R.id.addCSItemIB);
@@ -131,7 +133,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Intent intent1 = new Intent(this, CSItemActivity.class);
         intent1.putExtra("CSII", position);
         startActivity(intent1);
-        finish();
     }
 
     @Override
@@ -202,7 +203,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
                             finish();
-                            sharedPref.SetUsername("YouRGuest");
+                            sharedPref.SetUsername("YouRGuest", false);
                             Toast.makeText(getApplicationContext(), "You logged out",
                                     Toast.LENGTH_SHORT).show();
                             restartapp();
