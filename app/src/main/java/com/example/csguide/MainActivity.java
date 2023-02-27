@@ -21,9 +21,6 @@ import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -54,7 +51,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         builder = new AlertDialog.Builder(this);
 
         addCSItemIBtn = findViewById(R.id.addCSItemIB);
-        addCSItemIBtn.setOnClickListener(this);
+        if (!sharedPref.IsAdmin()) {
+            addCSItemIBtn.setVisibility(View.GONE);
+        } else {
+            addCSItemIBtn.setOnClickListener(this);
+        }
 
         listView = findViewById(R.id.listViewTry);
         searchedTextFlag = findViewById(R.id.searchedText);
@@ -84,7 +85,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     }
 
-    public void OpenAddMuscleDialog() {
+    public void OpenAddCSItemDialog() {
         addDialog = new Dialog(this);
         addDialog.setContentView(R.layout.custom_dialog_add_csitem);
         addDialog.setTitle("Add Item");
@@ -113,10 +114,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void createList()
     {
-        /*for (User user: DataModel.users) {
+        /*
+        for (User user: DataModel.users) {
             list.add(user.getUsername());
         }
-*/
+        */
 
         for (CSItem csitem: DataModel.csItems) {
             list.add(csitem.getName());
@@ -139,7 +141,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View view) {
         if (view == addCSItemIBtn)
         {
-            OpenAddMuscleDialog();
+            OpenAddCSItemDialog();
         }
     }
 
