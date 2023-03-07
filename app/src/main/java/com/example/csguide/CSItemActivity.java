@@ -150,11 +150,6 @@ public class CSItemActivity extends AppCompatActivity implements View.OnClickLis
             }
 
             new FetchImage(url).start();
-
-            /*
-            imageUri = Uri.parse(url);
-            csItemImageExample.setImageURI(imageUri);
-            */
         }
 
         //download image (142 - 150)
@@ -207,6 +202,7 @@ public class CSItemActivity extends AppCompatActivity implements View.OnClickLis
                         public void onClick(DialogInterface dialog, int id) {
                             finish();
 
+                            deleteImageFromStorage();
                             DataModel.csItems.get(getIntent().getIntExtra("CSII", 0)).setUrl(null);
                             DataModel.csItemsSave();
 
@@ -358,25 +354,40 @@ public class CSItemActivity extends AppCompatActivity implements View.OnClickLis
             imageUri = data.getData();
             progressDialog.setTitle("Uploading...");
             progressDialog.show();
+
+            if(url != null)
+            {
+                deleteImageFromStorage();
+            }
+
             uploadImage();
+            
         }
     }
 
+    private void deleteImageFromStorage()
+    {
+       StorageReference imageRef = firebaseStorage.getReferenceFromUrl(url);
+       imageRef.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+           @Override
+           public void onSuccess(Void unused) {
+               Toast.makeText(CSItemActivity.this, "Image Deleted", Toast.LENGTH_SHORT).show();
+           }
+       });
+    }
+
+    //uploading image to firebase storage
     private void uploadImage() {
         if (imageUri != null) {
-            // save the selected video in Firebase storage
+            // save the selected image in Firebase storage
             final StorageReference reference = FirebaseStorage.getInstance().getReference("Files/" + System.currentTimeMillis() + "." + getfiletype(imageUri));
             reference.putFile(imageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                 @Override
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                     Task<Uri> uriTask = taskSnapshot.getStorage().getDownloadUrl();
                     while (!uriTask.isSuccessful()) ;
-                    // get the link of video
+                    // get the link of image
                     String downloadUri = uriTask.getResult().toString();
-                    DatabaseReference reference1 = FirebaseDatabase.getInstance().getReference("Image");
-                    HashMap<String, String> map = new HashMap<>();
-                    map.put("imagelink", downloadUri);
-                    reference1.child("" + System.currentTimeMillis()).setValue(map);
                     // Image uploaded successfully
                     // Dismiss dialog
                     progressDialog.dismiss();
@@ -492,6 +503,7 @@ public class CSItemActivity extends AppCompatActivity implements View.OnClickLis
         }
         return true;
     }
+
 
     void restartapp() {
         Intent i = getIntent();
