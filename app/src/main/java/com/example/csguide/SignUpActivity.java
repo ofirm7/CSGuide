@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.method.HideReturnsTransformationMethod;
+import android.text.method.PasswordTransformationMethod;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -20,7 +22,7 @@ import java.util.regex.Pattern;
 
 public class SignUpActivity extends AppCompatActivity implements View.OnClickListener {
 
-    Button submit, toLoginFromSignUp;
+    Button submit, toLoginFromSignUp, showHidePassBtnR;
     EditText email, username, pass, passConfirmation, phoneNumber;
     SharedPref sharedPref;
 
@@ -38,6 +40,9 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         email = findViewById(R.id.emailSignUp);
         pass = findViewById(R.id.passwordSignUp);
         passConfirmation = findViewById(R.id.passwordConfirmationSignUp);
+        showHidePassBtnR = findViewById(R.id.showHidePassBtn);
+
+        showHidePassBtnR.setOnClickListener(this);
         submit.setOnClickListener(this);
         toLoginFromSignUp.setOnClickListener(this);
 
@@ -102,6 +107,15 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
             Intent intent = new Intent(this, LoginActivity.class);
             startActivity(intent);
             finish();
+        } else if (view == showHidePassBtnR)
+        {
+            if (showHidePassBtnR.getText().toString() == "Show") {
+                pass.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+                showHidePassBtnR.setText("Hide");
+            } else {
+                pass.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                showHidePassBtnR.setText("Show");
+            }
         }
     }
 

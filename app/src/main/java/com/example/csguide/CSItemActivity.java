@@ -361,7 +361,7 @@ public class CSItemActivity extends AppCompatActivity implements View.OnClickLis
             }
 
             uploadImage();
-            
+
         }
     }
 

@@ -48,15 +48,35 @@
         android:layout_marginTop="7dp"
         />
 
-    <EditText
-        android:id="@+id/passwordSignUp"
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="Password"
-        android:textSize="30dp"
+        android:orientation="horizontal"
         android:layout_gravity="center"
         android:layout_marginTop="7dp"
-        />
+        >
+
+        <EditText
+            android:id="@+id/passwordSignUp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="Password"
+            android:textSize="30dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="7dp"
+            android:inputType="textPassword"
+            />
+
+        <Button
+            android:layout_gravity="bottom"
+            android:id="@+id/showHidePassBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:text="Show"
+            android:textSize="10dp" />
+
+    </LinearLayout>
 
     <EditText
         android:id="@+id/passwordConfirmationSignUp"
@@ -66,6 +86,7 @@
         android:textSize="30dp"
         android:layout_gravity="center"
         android:layout_marginTop="7dp"
+        android:inputType="textPassword"
         />
 
     <Button
