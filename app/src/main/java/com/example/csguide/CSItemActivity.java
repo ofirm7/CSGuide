@@ -1,29 +1,31 @@
 package com.example.csguide;
 
-import static android.os.Environment.DIRECTORY_DCIM;
 import static android.os.Environment.DIRECTORY_DOWNLOADS;
-import static android.os.Environment.DIRECTORY_PICTURES;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import android.Manifest;
 import android.app.AlertDialog;
 import android.app.DownloadManager;
 import android.app.ProgressDialog;
 import android.content.ContentResolver;
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
-import android.os.Environment;
 import android.os.Handler;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -47,12 +49,11 @@ import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
-import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.text.SimpleDateFormat;
+import java.io.OutputStream;
 import java.util.HashMap;
+import java.util.Objects;
 
 public class CSItemActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -76,9 +77,10 @@ public class CSItemActivity extends AppCompatActivity implements View.OnClickLis
 
     String url = null;
     public  Uri imageUri;
-    static ImageView csItemImageExample;
+    ImageView csItemImageExample;
     ProgressDialog progressDialog;
 
+    private static final int REQUEST_CODE = 1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         sharedPref = new SharedPref(this);
@@ -196,7 +198,7 @@ public class CSItemActivity extends AppCompatActivity implements View.OnClickLis
         } else if (view == changeOrAddImage) {
             // Code for showing progressDialog while uploading
             progressDialog = new ProgressDialog(CSItemActivity.this);
-            chooseVideo();
+            chooseImage();
         } else if(view == deleteImage)
         {
             builder.setMessage("Do you want to delete this image?")
@@ -227,10 +229,81 @@ public class CSItemActivity extends AppCompatActivity implements View.OnClickLis
         }
         else if (view == downloadImageIB)
         {
-            downloadImageFunc();
+            if(ContextCompat.checkSelfPermission(CSItemActivity.this,
+                    Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED)
+            {
+                saveImage();
+                //downloadImageFunc();
+            }
+            else {
+                ActivityCompat.requestPermissions(CSItemActivity.this, new String[]{
+                        Manifest.permission.WRITE_EXTERNAL_STORAGE
+                }, REQUEST_CODE);
+            }
         }
     }
 
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+
+        if(requestCode == REQUEST_CODE)
+        {
+            if(grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                //saveImage();
+                //downloadImageFunc();
+            }
+            else {
+                //Toast.makeText(CSItemActivity.this, "Please provide permission", Toast.LENGTH_SHORT).show();
+            }
+        }
+
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+
+    }
+
+    //saving image to gallery
+    private void saveImage()
+    {
+        Uri images;
+        ContentResolver contentResolver = getContentResolver();
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            images = MediaStore.Images.Media.getContentUri(MediaStore.VOLUME_EXTERNAL_PRIMARY);
+        }else{
+            images = MediaStore.Images.Media.EXTERNAL_CONTENT_URI;
+        }
+
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(MediaStore.Images.Media.DISPLAY_NAME, System.currentTimeMillis() + ".jpg");
+        contentValues.put(MediaStore.Images.Media.MIME_TYPE, "images/*");
+        Uri uri = contentResolver.insert(images, contentValues);
+
+        try{
+
+            BitmapDrawable bitmapDrawable = (BitmapDrawable) csItemImageExample.getDrawable();
+            Bitmap bitmap = bitmapDrawable.getBitmap();
+
+            OutputStream outputStream = contentResolver.openOutputStream(Objects.requireNonNull(uri));
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, outputStream);
+            Objects.requireNonNull(outputStream);
+
+            downloadImageIB.setVisibility(View.GONE);
+            afterDownloadIV.setVisibility(View.VISIBLE);
+
+            Toast.makeText(CSItemActivity.this, "Image Saved Successfully", Toast.LENGTH_SHORT).show();
+
+        }catch (Exception e)
+        {
+            Toast.makeText(CSItemActivity.this, "Image Not Saved", Toast.LENGTH_SHORT).show();
+            e.printStackTrace();
+        }
+
+    }
+
+
+    //save image to downloads
     public void downloadImageFunc()
     {
 
@@ -271,7 +344,7 @@ public class CSItemActivity extends AppCompatActivity implements View.OnClickLis
         downloadManager.enqueue(request);
     }
 
-    private void chooseVideo() {
+    private void chooseImage() {
         Intent intent = new Intent();
         intent.setType("image/*");
         intent.setAction(Intent.ACTION_GET_CONTENT);
